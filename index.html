@@ -1,0 +1,53 @@
+<html>
+  <head>
+    <title>Hello, WebVR!</title>
+    <meta charset="utf-8" />
+
+    <script src="https://aframe.io/releases/1.1.0/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-environment-component@1.1.0/dist/aframe-environment-component.min.js"></script>
+    <script src="https://cdn.rawgit.com/donmccurdy/aframe-extras/v6.1.1/dist/aframe-extras.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/gh/n5ro/aframe-physics-system@v4.0.1/dist/aframe-physics-system.min.js"></script>
+    <script src="https://unpkg.com/aframe-physics-extras/dist/aframe-physics-extras.min.js"></script>
+    <script src="https://unpkg.com/aframe-thumb-controls-component@1.1.0/dist/aframe-thumb-controls-component.min.js"></script>
+    <script src="https://rawgit.com/fernandojsg/aframe-teleport-controls/master/dist/aframe-teleport-controls.min.js"></script>
+    
+    <script src="grab-ball.js"></script>
+    
+  </head>
+
+  <body>
+    <a-scene cursor="rayOrigin: mouse" environment="preset: forest" physics="iterations:5000">
+      
+     
+<!--       <a-sphere class="clickable" grab-ball croquet="name: ball" id="ball" hoverable grabbable stretchable draggable position="0 1 0" radius="1" color="#EF2D5E"></a-sphere> -->
+      <a-sphere dynamic-body id="ball" position="0 1 -1" radius="0.1"></a-sphere>
+      
+      <a-entity id="cameraRig" movement-controls navigator="cameraRig: #cameraRig; cameraHead: #head; collisionEntities: .collision; ignoreEntities: .clickable" position="0 0 0" rotation="0 0 0">
+        <!-- camera -->
+        <a-entity id="head" camera="active: true" position="0 1.6 0" look-controls wasd-controls></a-entity>
+        <!-- Right Controller -->
+        <a-entity id="rightHand" grab-ball oculus-touch-controls="hand: right" visible="true">
+          <a-entity class="fingers" position="-0.05 0 0"></a-entity>
+          <a-entity class="centerOfMass" position="0 -0.01 0.045"></a-entity>
+        </a-entity>
+
+        <!-- Left Controller -->
+        <a-entity id="leftHand" grab-ball oculus-touch-controls="hand: left" visible="true">
+          <a-entity class="fingers" position="-0.05 0 0"></a-entity>
+          <a-entity class="centerOfMass" position="0 0.01 0.045"></a-entity>
+        </a-entity>
+      </a-entity>
+      
+      <a-plane
+        color="limegreen"
+        scale="100 100 100"
+        rotation="-90 0 0"
+        visible="false"
+        position="0 -0.01 0"
+        static-body
+      ></a-plane>
+      
+    </a-scene>
+  </body>
+</html>
